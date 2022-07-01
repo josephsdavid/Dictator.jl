@@ -1,0 +1,4 @@
+name = "Dictator"
+uuid = "d6354553-efe8-47fc-8eb4-f0664942e285"
+authors = ["josephsdavid <josephsd@smu.edu>"]
+version = "0.1.0"

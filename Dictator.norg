@@ -1,0 +1,60 @@
+@document.meta
+title: Dictator
+description: 
+authors: djosephs
+categories: 
+created: 2022-06-29
+version: 0.0.11
+@end
+
+* Initialize module
+#tangle src/Dictator.jl
+@code julia 
+module Dictator 
+@end
+
+* The dictate function
+
+
+#tangle src/Dictator.jl
+@code julia
+
+function dictate(k)
+  return (d) -> d[k]
+end
+
+function dictate(k::AbstractVector)
+  return (d) -> reduce(((x,y) -> x[y]), k; init = d)
+end
+
+function dictate(k, d::AbstractDict)
+  return dictate(k)(d)
+end
+
+
+@end
+
+* Tests
+
+# tangle test/runtests.jl
+@code julia 
+
+td = Dict()
+td[:a] = Dict()
+td[:b] = Dict()
+td[:c] = Dict()
+td[:d] = Dict()
+dictate(:d)(td)[:a] = Dict(td[:d])
+dictate([:d,:a])(td) = 
+[:a] = Dict()
+
+@end
+
+* Finalize module
+
+
+#tangle src/Dictator.jl
+@code julia 
+end # module
+@end
+
